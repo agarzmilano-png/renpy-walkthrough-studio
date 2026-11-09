@@ -1,0 +1,34 @@
+{
+  "mpdecimal-4.0.0.txt": {
+    "url": "https://raw.githubusercontent.com/python/cpython-source-deps/mpdecimal-4.0.0/COPYRIGHT.txt",
+    "sha256": "2713324211652ce4a60e6e21e54f9dc3004299e591b0933a352f1a89c5fb53c2"
+  },
+  "expat-2.7.3.txt": {
+    "url": "https://raw.githubusercontent.com/python/cpython/v3.14.2/Modules/expat/COPYING",
+    "sha256": "122f2c27000472a201d337b9b31f7eb2b52d091b02857061a8880371612d9534"
+  },
+  "OpenSSL-3.0.18-Apache-2.0.txt": {
+    "url": "https://raw.githubusercontent.com/openssl/openssl/openssl-3.0.18/LICENSE.txt",
+    "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+  },
+  "zlib-ng-2.2.4.txt": {
+    "url": "https://raw.githubusercontent.com/python/cpython-source-deps/zlib-ng-2.2.4/LICENSE.md",
+    "sha256": "6c9f0d975b41afaa34d22f55bb8986ce69e5cb7ad327cb2b28820cd425edf5ee"
+  },
+  "xz-5.2.5-COPYING.txt": {
+    "url": "https://raw.githubusercontent.com/python/cpython-source-deps/xz-5.2.5/COPYING",
+    "sha256": "bcb02973ef6e87ea73d331b3a80df7748407f17efdb784b61b47e0e610d3bb5c"
+  },
+  "Roboto-Apache-2.0.txt": {
+    "url": "https://raw.githubusercontent.com/googlefonts/roboto/main/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "Tcl-license.terms.txt": {
+    "url": "https://raw.githubusercontent.com/tcltk/tcl/core-8-6-branch/license.terms",
+    "sha256": "c0a69a2bfd757361ec7e6143973b103c90409316b49e9c88db26ad6388e79f16"
+  },
+  "Tk-license.terms.txt": {
+    "url": "https://raw.githubusercontent.com/tcltk/tk/core-8-6-branch/license.terms",
+    "sha256": "2cde822b93ca16ae535c954b7dfe658b4ad10df2a193628d1b358f1765e8b198"
+  }
+}

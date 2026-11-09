@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0b1",
+  "date": "2026-11-10",
+  "app_sha256": "f3b77f72d5a7085dc332cad05057f19779614ff577d420ac95db56a15cd43166",
+  "source_line_endings": "LF",
+  "canonical_equivalence": "Identical text after newline normalization; ASTs also compared equal.",
+  "local_environment": {
+    "os": "Windows 11 x64",
+    "python": "3.14.2",
+    "customtkinter": "5.2.2",
+    "pyinstaller": "6.18.0"
+  },
+  "unit_tests": {
+    "total": 315,
+    "passed": 263,
+    "skipped": 52,
+    "failed": 0,
+    "skip_reason": "Preserved contracts for the removed legacy Engine/guide API; not counted as passing.",
+    "stdlib_only_environment": "passed",
+    "pinned_gui_environment": "passed"
+  },
+  "native_validation": {
+    "engines": ["8.1.3.23091805", "8.5.3.26051504"],
+    "both_all_cases": 120,
+    "incoming_context_cases": 22,
+    "official_the_question_cases": 7,
+    "total": 149,
+    "all_passed": true,
+    "all_runner_app_hashes_match": true,
+    "isolation": "Explicit local engines, private output copies; engine/game assets excluded from distribution.",
+    "scope": "Automated native execution, state, save/load and rollback tests; not exhaustive commercial-game route coverage."
+  },
+  "packaging_checks": {
+    "wheel_build": "passed",
+    "wheel_install_without_optional_dependencies": "passed",
+    "installed_cli_version_help_config": "passed",
+    "sdist_build": "passed",
+    "frozen_version_help_config": "passed",
+    "frozen_read_only_unicode_path_scan": "passed; synthetic game file inventory and hashes unchanged",
+    "frozen_gui_open_close": "passed; WM_CLOSE sent only to the launched application's PID",
+    "repository_negative_checks": "Private path, archive, environment file and CRLF samples rejected; generated build directory ignored."
+  },
+  "not_performed": [
+    "GitHub-hosted CI execution",
+    "Clean Windows VM without Python installed",
+    "Code signing",
+    "Exhaustive testing of arbitrary Python/init/screen behavior or every commercial-game route"
+  ],
+  "publication": "Prepared locally only; no repository, push, tag or GitHub Release created."
+}

@@ -1,0 +1,6 @@
+{
+  "route_contracts": {"dalia": ["dalia_entry"]},
+  "verdicts": ["GREEN", "RED"],
+  "preserved": [["route:dalia"], []],
+  "lost": [[], ["route:dalia"]]
+}

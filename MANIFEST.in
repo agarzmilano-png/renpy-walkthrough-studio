@@ -1,0 +1,11 @@
+include README.md LICENSE THIRD_PARTY_NOTICES.md CHANGELOG.md SECURITY.md CONTRIBUTING.md
+include requirements-gui.txt requirements-build.txt
+recursive-include LICENSES *.txt *.json
+recursive-include docs *.md *.json
+recursive-include scripts *.py
+recursive-include tests *.py *.rpy *.json
+recursive-exclude tests *.latest.json
+recursive-exclude * __pycache__ *.pyc *.rpyc *.rpa *.wtbak *.bak
+prune dist
+prune build
+prune .venv

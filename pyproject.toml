@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "renpy-walkthrough-studio"
+dynamic = ["version"]
+description = "Conservative source-based Ren'Py choice analysis and Both/All scene composition"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE", "LICENSES/*.txt", "THIRD_PARTY_NOTICES.md"]
+authors = [{ name = "Ren'Py Walkthrough Studio contributors" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Games/Entertainment",
+]
+
+[project.optional-dependencies]
+gui = ["customtkinter==5.2.2", "darkdetect==0.8.0", "packaging==26.0"]
+diagnostics = ["psutil==7.2.2"]
+
+[project.scripts]
+renpy-walkthrough-studio = "renpy_walkthrough_studio:main"
+
+[tool.setuptools]
+py-modules = ["renpy_walkthrough_studio"]
+
+[tool.setuptools.dynamic]
+version = { attr = "renpy_walkthrough_studio.__version__" }

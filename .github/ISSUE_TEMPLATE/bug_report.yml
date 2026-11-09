@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a reproducible problem with a small, non-proprietary example.
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Application version
+      description: Run --version; include whether you used source or portable ZIP.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Windows/Linux, Python and Ren'Py versions
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, options, expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Small synthetic source or sanitized logs
+      description: Do not upload games, archives, saves, credentials or private paths.
+      render: text
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety and scope
+      options:
+        - label: I tested on a separate copy and did not include proprietary or private files.
+          required: true
+        - label: I understand a neutral decision may mean the result is unproven.
+          required: true
