@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0b2",
+  "date": "2026-11-10",
+  "app_sha256": "4a61bacdb6b1c517f44c3082c7f3e16ddfd8c6068344340bc285e0317c6b192d",
+  "source_line_endings": "LF",
+  "fix": "Record the temporary file's own signature before atomic replacement, then recheck all batch sources after each write. Do not acknowledge an external edit to the current target.",
+  "regression": {
+    "first_file_orders": 4,
+    "external_edit_targets": ["current file", "different file"],
+    "subcases": 8,
+    "original_implementation_reproduced_on_windows": "All four current-target orders failed as expected with the old acknowledgement method.",
+    "additional_manual_checks": ["External edit after final write detected and preserved", "No-op write cannot acknowledge an external change"]
+  },
+  "unit_tests": {
+    "total": 315,
+    "passed": 263,
+    "skipped": 52,
+    "failed": 0,
+    "skip_reason": "Unchanged preserved legacy Engine/guide API contracts; not counted as passing.",
+    "stdlib_only_environment": "passed",
+    "pinned_gui_environment": "passed"
+  },
+  "github_ci": {
+    "url": "https://github.com/agarzmilano-png/renpy-walkthrough-studio/actions/runs/42701790134",
+    "commit": "3aca5a07f521a983f59dfa2998a14ac26d8dc929",
+    "platforms": ["ubuntu-latest", "windows-latest"],
+    "python": ["3.12", "3.13", "3.14"],
+    "jobs_passed": 6,
+    "jobs_failed": 0
+  },
+  "native_validation": {
+    "engines": ["8.1.3.23091805", "8.5.3.26051504"],
+    "both_all_cases": 120,
+    "incoming_context_cases": 22,
+    "official_the_question_cases": 7,
+    "total": 149,
+    "all_passed": true,
+    "all_runner_app_hashes_match": true,
+    "isolation": "Private test copies; no engine or game assets distributed."
+  },
+  "packaging_checks": {
+    "wheel_build_and_install": "passed without optional dependencies",
+    "sdist_build": "passed",
+    "installed_cli_version_help_config": "passed; installed application hash matches this record",
+    "frozen_cli_and_gui": "passed: version, help, config, read-only Unicode-path scan and visible GUI open/close"
+  },
+  "not_performed": [
+    "Clean Windows VM without Python installed",
+    "Code signing",
+    "Exhaustive arbitrary Python/init/screen or commercial-game route testing"
+  ]
+}

@@ -23,6 +23,12 @@ dış değişiklik yapılarak çalıştırılıyor. Eski kodun hatası Windows't
 yeniden üretildi. Linux testleri kaldırılmadı; testler atlanarak geçirilmedi.
 Güncel doğrulama bilgileri `docs/VALIDATION.md` dosyasındadır.
 
+- GitHub CI: Windows/Linux × Python 3.12, 3.13, 3.14 — **6/6 iş geçti**.
+- Test paketi: **263 başarılı, 52 eski API sözleşmesi açıkça atlandı** (315 toplam).
+- İki yerel Ren'Py motorunda **149/149 native senaryo geçti**; uygulama hash'leri eşleşti.
+- Windows EXE sürüm/yardım/yapılandırma, salt okunur Unicode-yol taraması ve GUI
+  aç/kapat kontrollerini geçti. Temiz VM veya imzalı paket iddiası değildir.
+
 ## İndirme ve kullanım
 
 - Windows x64: `RenpyWalkthroughStudio-0.1.0b2-windows-x64.zip`; tamamını çıkarın,

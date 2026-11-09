@@ -2,6 +2,34 @@
 
 This is a beta, not a claim of universal Ren'Py compatibility.
 
+## 0.1.0b2: Linux CI fix and rerun
+
+The initial b1 run passed its three Windows jobs but failed the three Linux jobs
+in the external-edit regression. Filesystem enumeration exposed a real batch-write
+race: an external edit to the just-written target could be accepted as our own.
+b2 records the temporary file's own signature before replacement and rechecks all
+tracked sources immediately after each write. The existing regression now covers
+four first-file orders and edits to both the current and another file (8 subcases).
+The old method was also confirmed to fail all four current-target orders on Windows.
+Manual checks also cover edits after the final write and no-op acknowledgement.
+
+All **six** Windows/Linux × Python 3.12/3.13/3.14 jobs passed for the fix:
+[GitHub Actions run 42701790134](https://github.com/agarzmilano-png/renpy-walkthrough-studio/actions/runs/42701790134).
+The full suite remains **315 total, 263 passed, 52 unchanged legacy skips**.
+No platform, test or safety requirement was removed. All **149 native scenarios**
+also passed again with the b2 source hash on both tested engines.
+See [validation-0.1.0b2.json](validation-0.1.0b2.json) for current evidence.
+
+The b2 wheel installed without GUI dependencies and its CLI passed version/help/
+config checks with the recorded application hash. The b2 Windows portable build
+passed CLI, read-only Unicode-path scan, and visible GUI open/close checks locally.
+Clean Windows VM testing and code signing remain unperformed.
+
+The analysis/color algorithms are unchanged. This fix is not a general filesystem
+locking/transaction guarantee; do not edit game sources while a patch is running.
+
+## Historical 0.1.0b1 evidence
+
 ## Unit tests
 
 ```powershell

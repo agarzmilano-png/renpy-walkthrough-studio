@@ -7,6 +7,9 @@ walkthrough hints. The current GUI and generated hints are primarily Turkish.
 [Türkçe kullanım](docs/README_TR.md) · [Analysis limits](docs/ANALYSIS.md) ·
 [Validation](docs/VALIDATION.md) · [Release instructions](docs/RELEASING.md)
 
+[Download v0.1.0b2](https://github.com/agarzmilano-png/renpy-walkthrough-studio/releases/tag/v0.1.0b2).
+Use this version instead of b1: it fixes the batch-write safety race exposed by Linux CI.
+
 > Always work on a separate copy of a game you own or are authorized to modify.
 > A neutral option means **not proven**, not necessarily harmless or ineffective.
 > This project is not affiliated with or endorsed by the Ren'Py project or game authors.
