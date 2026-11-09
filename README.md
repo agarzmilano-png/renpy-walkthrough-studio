@@ -1,6 +1,6 @@
 # Ren'Py Walkthrough Studio
 
-**0.1.0b1 — beta.** A single-file Python application for source-based Ren'Py
+**0.1.0b2 — beta.** A single-file Python application for source-based Ren'Py
 choice analysis, conservative Both/All scene composition, and optional in-game
 walkthrough hints. The current GUI and generated hints are primarily Turkish.
 

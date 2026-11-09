@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: MIT
 # Embedded third-party components retain their original MIT notices.
-__version__ = "0.1.0b1"
+__version__ = "0.1.0b2"
 
 import warnings
 warnings.filterwarnings('ignore', category=SyntaxWarning)
@@ -12888,6 +12888,7 @@ class RenpyWalkthroughAnalyzer:
         self.uncertain_thresholds = []
         self.last_lint_output = ""
         self._in_batch_patch = False
+        self._walkthrough_write_states = {}
         # R6 Faz 1-3: yeni analitik durum alanlari
         self.project_ctx = None              # {"consumed_vars": (set, is_dynamic)} — karar motoruna proje genelini baglar
         self.label_scan_memo = {}            # (label, stop_labels) -> tarama ozeti; durumsuz yan cagrilar icin genellenmis memo
@@ -16498,6 +16499,7 @@ class RenpyWalkthroughAnalyzer:
 
     def patch_file(self, fpath, lines, menus):
         """H9, Katman 5, N1, N2, R9, M1, M2b, K1, K2 & M3: Guvenli kodlamali, sozluk dogrulamali ve geri almali yama motoru."""
+        self._walkthrough_write_states.pop(fpath, None)
         green_hex = self.options.get("green_color", "#2ECC71")
         red_hex = self.options.get("red_color", "#EF4444")
         show_hints = self.options.get("show_hints", True)
@@ -16784,7 +16786,11 @@ class RenpyWalkthroughAnalyzer:
                 with open(tmp_fpath, "w", encoding=enc, errors="surrogateescape", newline="") as f:
                     f.writelines(normalized_lines)
                 if os.path.exists(tmp_fpath) and os.path.getsize(tmp_fpath) > 0:
+                    # Remember our own completed temporary file, not a later
+                    # stat of the target that may already contain an external edit.
+                    written_stat = os.stat(tmp_fpath)
                     os.replace(tmp_fpath, fpath)
+                    self._walkthrough_write_states[fpath] = (written_stat.st_mtime_ns, written_stat.st_size)
                 else:
                     if os.path.exists(tmp_fpath): os.remove(tmp_fpath)
                     if os.path.exists(bak_path): shutil.copy2(bak_path, fpath)
@@ -18528,8 +18534,12 @@ class RenpyWalkthroughAnalyzer:
                 raise RuntimeError('Kaynak analizden sonra değişti; yeniden tarayın: ' + path)
 
     def _record_walkthrough_write(self, expected, path):
-        st = os.stat(path)
-        expected[path] = (st.st_mtime_ns, st.st_size)
+        written = self._walkthrough_write_states.pop(path, None)
+        if written is not None:
+            expected[path] = written
+        # Also check after the last write, and when patch_file made no change.
+        # Never bless an external edit just because it targets the current file.
+        self._check_walkthrough_sources(expected)
 
     def _prepare_walkthrough_profile(self, lines, menus, highlight_negative):
         profile = self.options.get('player_profile', 'ALL_CONTENT')

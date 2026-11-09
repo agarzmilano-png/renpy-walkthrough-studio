@@ -173,23 +173,35 @@ class BatchSchedulingTests(unittest.TestCase):
         self.assertEqual(calls, [{'highlight_negative': True, 'player_profile': 'ROMANCE_ONLY'}])
 
     def test_external_edit_between_writes_does_not_get_acknowledged_as_ours(self):
-        root = self.game()
-        ui = WorkerUI()
-        real_write = studio.RenpyWalkthroughAnalyzer.patch_file
-        writes = []
-        changed_path = root / '03.rpy'
-        original = changed_path.read_bytes()
-        def write(analyzer, path, *args, **kwargs):
-            result = real_write(analyzer, path, *args, **kwargs)
-            writes.append(path)
-            if len(writes) == 1:
-                changed_path.write_bytes(original + b'\n# concurrent edit\n')
-            return result
-        with patch.object(studio.RenpyWalkthroughAnalyzer, 'patch_file', write):
-            studio.RenpyWalkthroughApp.run_process(ui, 'patch', str(root))
-        self.assertEqual(len(writes), 1)
-        self.assertTrue(ui.errors)
-        self.assertEqual(changed_path.read_bytes(), original + b'\n# concurrent edit\n')
+        # Filesystem enumeration is not portable. Explicitly exercise every
+        # first file and edits to both the current target and a different file.
+        for first in range(4):
+            for edit_current in (False, True):
+                with self.subTest(first=first, edit_current=edit_current):
+                    root = self.game()
+                    ui = WorkerUI()
+                    real_write = studio.RenpyWalkthroughAnalyzer.patch_file
+                    real_scan = studio.RenpyWalkthroughAnalyzer.scan_files
+                    writes = []
+                    changed_path = root / f'{first if edit_current else (first + 1) % 4:02}.rpy'
+                    original = changed_path.read_bytes()
+                    def scan(analyzer, *args, **kwargs):
+                        result = real_scan(analyzer, *args, **kwargs)
+                        analyzer.rpy_files.sort(key=lambda path: (
+                            Path(path).name != f'{first:02}.rpy', Path(path).name))
+                        return result
+                    def write(analyzer, path, *args, **kwargs):
+                        result = real_write(analyzer, path, *args, **kwargs)
+                        writes.append(path)
+                        if len(writes) == 1:
+                            changed_path.write_bytes(original + b'\n# concurrent edit\n')
+                        return result
+                    with patch.object(studio.RenpyWalkthroughAnalyzer, 'scan_files', scan), \
+                         patch.object(studio.RenpyWalkthroughAnalyzer, 'patch_file', write):
+                        studio.RenpyWalkthroughApp.run_process(ui, 'patch', str(root))
+                    self.assertEqual(len(writes), 1)
+                    self.assertTrue(ui.errors)
+                    self.assertEqual(changed_path.read_bytes(), original + b'\n# concurrent edit\n')
 
 
 if __name__ == '__main__':

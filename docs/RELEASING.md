@@ -56,7 +56,7 @@ Derleme bayt düzeyinde yeniden üretilebilirlik veya kod imzası iddiası deği
 
 ## 4. GitHub Release
 
-İlk etiket: **`v0.1.0b1`**. Bunu **pre-release** olarak işaretleyin.
+Güncel etiket: **`v0.1.0b2`**. Bunu **pre-release** olarak işaretleyin.
 `CHANGELOG.md` özetini kullanın; Windows ZIP'i ve `SHA256SUMS.txt` yükleyin.
 GitHub otomatik kaynak arşivi zaten kaynak dağıtımı sağlar. Başlıkta beta
 olduğunu, arayüzün ağırlıklı Türkçe olduğunu ve nötr kararın doğrulanmamış
